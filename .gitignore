@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+
+# Build outputs
+dist/
+
+# Local database files & logs
+**/server/data/db/
+*.log
