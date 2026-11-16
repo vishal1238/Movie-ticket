@@ -52,7 +52,7 @@ const bookingSchema = new mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      default: 'Mock Card / Online'
+      default: 'Razorpay'
     },
     paymentId: {
       type: String,

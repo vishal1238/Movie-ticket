@@ -9,11 +9,11 @@ const { protect, admin } = require('../middleware/auth');
 
 const router = express.Router();
 
-router.use(protect); // All booking routes require authentication
+router.use(protect);
 
 router.post('/', createBooking);
 router.get('/my-bookings', getMyBookings);
 router.get('/:id', getBookingById);
-router.get('/', admin, getAllBookings); // Admin only to view all bookings
+router.get('/', admin, getAllBookings);
 
 module.exports = router;

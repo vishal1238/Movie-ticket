@@ -6,7 +6,6 @@ const PriceSummary = ({
   pricing = { regular: 200, premium: 350 },
   onProceed
 }) => {
-  // Calculate breakdown
   let regularCount = 0;
   let premiumCount = 0;
 
@@ -38,7 +37,6 @@ const PriceSummary = ({
           </span>
         </div>
 
-        {/* Selected Seats List */}
         <div>
           <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider block mb-2">
             Selected Seats
@@ -66,7 +64,6 @@ const PriceSummary = ({
           )}
         </div>
 
-        {/* Price Breakdown */}
         <div className="space-y-2.5 text-sm pt-2 border-t border-zinc-800/80">
           {premiumCount > 0 && (
             <div className="flex justify-between text-zinc-300">
@@ -108,12 +105,12 @@ const PriceSummary = ({
           }`}
         >
           <CreditCard className="w-5 h-5" />
-          Proceed to Mock Payment
+          Proceed to Payment
         </button>
 
         <div className="flex items-center justify-center gap-1.5 text-[11px] text-zinc-500">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-          <span>Backend Validated • Instant Mock Confirmation</span>
+          <span>100% Safe & Secure Checkout</span>
         </div>
       </div>
     </div>

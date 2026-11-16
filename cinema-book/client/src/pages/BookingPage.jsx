@@ -19,10 +19,8 @@ const BookingPage = () => {
   const [loading, setLoading] = useState(true);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [confirmedBooking, setConfirmedBooking] = useState(null);
 
-  // Fetch show details from backend
   const fetchShowDetails = async () => {
     try {
       setLoading(true);
@@ -39,27 +37,23 @@ const BookingPage = () => {
     fetchShowDetails();
   }, [showId]);
 
-  // Handle seat click
   const handleSeatClick = (seatId) => {
-    // If seat is already booked in DB, ignore
     if (show?.bookedSeats?.includes(seatId)) {
-      toast.error(`Seat ${seatId} is already booked!`);
+      toast.error(`Seat ${seatId} is already booked`);
       return;
     }
 
     if (selectedSeats.includes(seatId)) {
       setSelectedSeats(selectedSeats.filter((s) => s !== seatId));
     } else {
-      // Limit to max 8 tickets per transaction
       if (selectedSeats.length >= 8) {
-        toast.error('You can select a maximum of 8 seats per booking.');
+        toast.error('You can select a maximum of 8 seats per booking');
         return;
       }
       setSelectedSeats([...selectedSeats, seatId]);
     }
   };
 
-  // Proceed to payment
   const handleProceedToPayment = () => {
     if (!isAuthenticated) {
       toast('Please sign in to proceed with your booking.', {
@@ -77,18 +71,13 @@ const BookingPage = () => {
     setIsPaymentModalOpen(true);
   };
 
-  // Confirm payment & call backend booking API
-  const handleConfirmPayment = async (paymentMethodLabel) => {
+  const handleConfirmPayment = async (paymentDetails = {}) => {
     try {
-      setIsProcessingPayment(true);
-
-      // Simulate network processing delay for realistic UX
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-
       const payload = {
         showId: show._id,
         seats: selectedSeats,
-        paymentMethod: paymentMethodLabel
+        paymentMethod: paymentDetails.paymentMethod || 'Razorpay',
+        paymentId: paymentDetails.paymentId
       };
 
       const res = await api.post('/bookings', payload);
@@ -99,12 +88,8 @@ const BookingPage = () => {
       toast.success('Ticket booked successfully!');
     } catch (error) {
       toast.error(error.message || 'Booking failed. Please try again.');
-      // Refresh show details to show newly booked seats if there was a collision
       fetchShowDetails();
-      // Remove any seats from user selection that are now booked
       setIsPaymentModalOpen(false);
-    } finally {
-      setIsProcessingPayment(false);
     }
   };
 
@@ -133,7 +118,6 @@ const BookingPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Top Breadcrumb & Movie Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800 pb-6">
         <div className="flex items-center gap-4">
           <button
@@ -165,9 +149,7 @@ const BookingPage = () => {
         </div>
       </div>
 
-      {/* Main Grid: Interactive Seat Layout + Price Summary */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        {/* Seat Layout (Left 2 Columns) */}
         <div className="lg:col-span-2 bg-[#121217] border border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-xl">
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
@@ -187,7 +169,6 @@ const BookingPage = () => {
           />
         </div>
 
-        {/* Price Breakdown & Checkout (Right 1 Column) */}
         <div className="lg:col-span-1 sticky top-24">
           <PriceSummary
             selectedSeats={selectedSeats}
@@ -197,7 +178,6 @@ const BookingPage = () => {
         </div>
       </div>
 
-      {/* Mock Payment Modal */}
       <PaymentModal
         isOpen={isPaymentModalOpen}
         onClose={() => setIsPaymentModalOpen(false)}
@@ -212,10 +192,8 @@ const BookingPage = () => {
           }, 0) + (selectedSeats.length * 25)
         }
         onConfirmPayment={handleConfirmPayment}
-        isProcessing={isProcessingPayment}
       />
 
-      {/* Booking Success Modal */}
       {confirmedBooking && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
           <div className="bg-[#121217] border border-red-500/40 rounded-3xl max-w-md w-full p-6 text-center space-y-6 shadow-2xl animate-fade-in">
@@ -225,7 +203,7 @@ const BookingPage = () => {
 
             <div className="space-y-2">
               <span className="text-xs uppercase font-extrabold tracking-widest text-red-400">
-                Booking Confirmed!
+                Booking Confirmed
               </span>
               <h3 className="text-2xl font-black text-white">{movie?.title}</h3>
               <p className="text-xs text-zinc-400">
@@ -233,7 +211,6 @@ const BookingPage = () => {
               </p>
             </div>
 
-            {/* Ticket details summary */}
             <div className="bg-zinc-900/80 border border-zinc-800 rounded-xl p-4 text-left space-y-2 text-xs">
               <div className="flex justify-between">
                 <span className="text-zinc-500">Booking ID:</span>

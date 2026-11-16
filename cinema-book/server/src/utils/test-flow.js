@@ -110,7 +110,7 @@ const runTests = async () => {
     {
       showId: targetShow._id,
       seats: ['B1', 'B2'],
-      paymentMethod: 'Credit / Debit Card (Mock)'
+      paymentMethod: 'Razorpay'
     }
   );
   console.log(`Status: ${bookingRes.status}`);
@@ -135,7 +135,7 @@ const runTests = async () => {
     {
       showId: targetShow._id,
       seats: ['B1'],
-      paymentMethod: 'Mock Card'
+      paymentMethod: 'Razorpay'
     }
   );
   console.log(`Double-booking test response status: ${collisionRes.status}`);

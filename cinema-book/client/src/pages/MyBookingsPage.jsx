@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Ticket, Calendar, Clock, MapPin, Download, CheckCircle2, Film } from 'lucide-react';
+import { Ticket, Calendar, Clock, MapPin, Download, CheckCircle2 } from 'lucide-react';
 import api from '../services/api';
 import toast from 'react-hot-toast';
 import { generateTicketPDF } from '../utils/generateTicketPDF';
@@ -38,7 +38,6 @@ const MyBookingsPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Header */}
       <div className="border-b border-zinc-800 pb-5">
         <h1 className="text-3xl font-black text-white flex items-center gap-3">
           <Ticket className="w-8 h-8 text-red-500" />
@@ -78,7 +77,6 @@ const MyBookingsPage = () => {
                 key={booking._id}
                 className="bg-[#121217] border border-zinc-800 rounded-2xl overflow-hidden shadow-xl flex flex-col sm:flex-row transition-all hover:border-zinc-700 hover:shadow-2xl hover:shadow-red-950/20"
               >
-                {/* Left Poster Thumbnail */}
                 <div className="sm:w-40 w-full aspect-[2/3] sm:aspect-auto bg-zinc-900 shrink-0 relative">
                   <img
                     src={movie?.posterUrl}
@@ -94,7 +92,6 @@ const MyBookingsPage = () => {
                   </div>
                 </div>
 
-                {/* Right Details Body */}
                 <div className="p-5 flex flex-col justify-between flex-grow space-y-4">
                   <div className="space-y-2">
                     <div className="flex items-start justify-between gap-2">
@@ -118,7 +115,6 @@ const MyBookingsPage = () => {
                       </div>
                     </div>
 
-                    {/* Date and Time Pills */}
                     <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
                       <span className="flex items-center gap-1 bg-zinc-900 px-2.5 py-1 rounded-md border border-zinc-800 text-zinc-300">
                         <Calendar className="w-3.5 h-3.5 text-zinc-400" />
@@ -130,7 +126,6 @@ const MyBookingsPage = () => {
                       </span>
                     </div>
 
-                    {/* Seats Info */}
                     <div className="bg-zinc-900/60 p-2.5 rounded-xl border border-zinc-800/80 space-y-1">
                       <div className="flex justify-between text-xs">
                         <span className="text-zinc-500">Reserved Seats:</span>
@@ -147,7 +142,6 @@ const MyBookingsPage = () => {
                     </div>
                   </div>
 
-                  {/* Actions Bar */}
                   <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between text-xs">
                     <span className="text-[10px] text-zinc-500 font-mono">
                       Txn: {booking.paymentId?.slice(0, 18)}...

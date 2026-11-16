@@ -35,7 +35,7 @@ const LoginPage = () => {
       setPassword(demoPassword);
       setLoading(true);
       await login(demoEmail, demoPassword);
-      toast.success(`Logged in as Demo ${roleName}!`);
+      toast.success(`Logged in as ${roleName}`);
       navigate(redirectPath, { replace: true });
     } catch (error) {
       toast.error(error.message || 'Quick login failed');
@@ -47,27 +47,25 @@ const LoginPage = () => {
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full bg-[#121217] border border-zinc-800 rounded-2xl p-8 shadow-2xl space-y-6">
-        {/* Brand Header */}
         <div className="text-center space-y-2">
           <div className="w-12 h-12 rounded-xl bg-red-600 flex items-center justify-center mx-auto shadow-lg shadow-red-600/30">
             <Film className="w-6 h-6 text-white" />
           </div>
           <h2 className="text-2xl font-black text-white">Welcome Back</h2>
           <p className="text-xs text-zinc-400">
-            Sign in to reserve premium cinema tickets and access your passes
+            Sign in to reserve cinema tickets and view your passes
           </p>
         </div>
 
-        {/* 1-Click Quick Demo Login Buttons for Internship Reviewers */}
         <div className="bg-zinc-900/80 border border-zinc-800/80 rounded-xl p-3.5 space-y-2">
           <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-red-400" />
-            Quick Demo Reviewer Access
+            Quick Access
           </span>
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
-              onClick={() => handleQuickLogin('user@cinemabook.com', 'user123', 'User')}
+              onClick={() => handleQuickLogin('user@cinemabook.com', 'user123', 'Demo User')}
               className="py-2 px-3 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors"
             >
               <UserCheck className="w-3.5 h-3.5 text-red-400" />
@@ -75,7 +73,7 @@ const LoginPage = () => {
             </button>
             <button
               type="button"
-              onClick={() => handleQuickLogin('admin@cinemabook.com', 'admin123', 'Admin')}
+              onClick={() => handleQuickLogin('admin@cinemabook.com', 'admin123', 'Administrator')}
               className="py-2 px-3 bg-red-950/40 hover:bg-red-900/40 text-red-300 border border-red-800/60 text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-red-400" />
@@ -84,7 +82,6 @@ const LoginPage = () => {
           </div>
         </div>
 
-        {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="text-xs font-semibold text-zinc-400 block mb-1">

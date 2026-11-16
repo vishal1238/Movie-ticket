@@ -1,8 +1,5 @@
 const Movie = require('../models/Movie');
 
-// @desc    Get all movies with filters & search
-// @route   GET /api/movies
-// @access  Public
 exports.getMovies = async (req, res, next) => {
   try {
     const { status, genre, search } = req.query;
@@ -35,9 +32,6 @@ exports.getMovies = async (req, res, next) => {
   }
 };
 
-// @desc    Get single movie by ID
-// @route   GET /api/movies/:id
-// @access  Public
 exports.getMovieById = async (req, res, next) => {
   try {
     const movie = await Movie.findById(req.params.id);
@@ -58,9 +52,6 @@ exports.getMovieById = async (req, res, next) => {
   }
 };
 
-// @desc    Create new movie
-// @route   POST /api/movies
-// @access  Private/Admin
 exports.createMovie = async (req, res, next) => {
   try {
     const movie = await Movie.create(req.body);
@@ -74,9 +65,6 @@ exports.createMovie = async (req, res, next) => {
   }
 };
 
-// @desc    Update movie
-// @route   PUT /api/movies/:id
-// @access  Private/Admin
 exports.updateMovie = async (req, res, next) => {
   try {
     const movie = await Movie.findByIdAndUpdate(req.params.id, req.body, {
@@ -101,9 +89,6 @@ exports.updateMovie = async (req, res, next) => {
   }
 };
 
-// @desc    Delete movie
-// @route   DELETE /api/movies/:id
-// @access  Private/Admin
 exports.deleteMovie = async (req, res, next) => {
   try {
     const movie = await Movie.findByIdAndDelete(req.params.id);

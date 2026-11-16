@@ -1,8 +1,5 @@
 const Theatre = require('../models/Theatre');
 
-// @desc    Get all theatres
-// @route   GET /api/theatres
-// @access  Public
 exports.getTheatres = async (req, res, next) => {
   try {
     const theatres = await Theatre.find().sort({ name: 1 });
@@ -16,9 +13,6 @@ exports.getTheatres = async (req, res, next) => {
   }
 };
 
-// @desc    Create theatre
-// @route   POST /api/theatres
-// @access  Private/Admin
 exports.createTheatre = async (req, res, next) => {
   try {
     const theatre = await Theatre.create(req.body);

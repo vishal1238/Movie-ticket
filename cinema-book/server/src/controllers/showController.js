@@ -1,8 +1,5 @@
 const Show = require('../models/Show');
 
-// @desc    Get shows for a movie (optionally filtered by date)
-// @route   GET /api/shows/movie/:movieId
-// @access  Public
 exports.getShowsByMovie = async (req, res, next) => {
   try {
     const { movieId } = req.params;
@@ -28,9 +25,6 @@ exports.getShowsByMovie = async (req, res, next) => {
   }
 };
 
-// @desc    Get single show details (including booked seats and pricing)
-// @route   GET /api/shows/:id
-// @access  Public
 exports.getShowById = async (req, res, next) => {
   try {
     const show = await Show.findById(req.params.id)
@@ -53,9 +47,6 @@ exports.getShowById = async (req, res, next) => {
   }
 };
 
-// @desc    Create a new show
-// @route   POST /api/shows
-// @access  Private/Admin
 exports.createShow = async (req, res, next) => {
   try {
     const show = await Show.create(req.body);
@@ -73,9 +64,6 @@ exports.createShow = async (req, res, next) => {
   }
 };
 
-// @desc    Delete show
-// @route   DELETE /api/shows/:id
-// @access  Private/Admin
 exports.deleteShow = async (req, res, next) => {
   try {
     const show = await Show.findByIdAndDelete(req.params.id);

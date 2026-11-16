@@ -235,7 +235,7 @@ export const generateTicketPDF = (booking) => {
   doc.setTextColor(130, 130, 145);
   doc.setFontSize(6.5);
   doc.setFont('courier', 'normal');
-  doc.text(`TXN: ${booking.paymentId || 'MOCK-TXN-VERIFIED'}  |  ISSUED: ${new Date().toLocaleString()}`, pageWidth / 2, y, { align: 'center' });
+  doc.text(`TXN: ${booking.paymentId || 'TXN-SUCCESS'}  |  ISSUED: ${new Date().toLocaleString()}`, pageWidth / 2, y, { align: 'center' });
 
   // 10. Footer Instructions
   y += 6;

@@ -253,8 +253,8 @@ const seedData = async () => {
       convenienceFee: 50,
       totalAmount: (firstShow.price.regular * 2) + 50,
       paymentStatus: 'completed',
-      paymentMethod: 'Credit / Debit Card',
-      paymentId: 'MOCK-TXN-INIT-90214'
+      paymentMethod: 'Razorpay',
+      paymentId: 'pay_DEMO_INIT90214'
     });
     console.log(`Seeded initial booking ${initialBooking.bookingId} for demo user`);
 

@@ -45,10 +45,10 @@ Designed as a one-day MVP for demonstrating full-stack engineering skills for an
 - Real-time seat status indicators: Available, Selected (red glow), Booked (disabled).
 - **Backend Concurrency Protection**: Seat availability is re-validated on the backend prior to checkout. An atomic MongoDB conditional update (`$addToSet` / `$nin`) prevents race conditions and ensures zero double-booking.
 
-### 5. Mock Payment & Booking Confirmation
+### 5. Razorpay Checkout & Booking Confirmation
 - Dynamic order summary calculation (VIP tickets, Regular tickets, convenience fee).
-- Interactive Mock Payment modal (Credit/Debit Card, UPI Fast, Net Banking).
-- Generates a unique CinemaBook booking ID (`CB-XXXXXX`) and transaction ID (`MOCK-TXN-...`).
+- Integrated Razorpay Checkout modal (Card, UPI, Net Banking).
+- Generates a unique CinemaBook booking ID (`CB-XXXXXX`) and transaction ID (`pay_...`).
 - **My Bookings page**: View your past and upcoming reservations with movie details, theatre location, reserved seats, total amount paid, and digital pass download action.
 
 ### 6. Admin Management Console
@@ -196,7 +196,7 @@ Open **[http://localhost:5000](http://localhost:5000)** in your browser!
 | Role | Email | Password | Access |
 |---|---|---|---|
 | **Administrator** | `admin@cinemabook.com` | `admin123` | Full access to Admin Dashboard, Movie CRUD, All Bookings |
-| **Demo User** | `user@cinemabook.com` | `user123` | Browse, Select Seats, Mock Payment, My Bookings |
+| **Demo User** | `user@cinemabook.com` | `user123` | Browse, Select Seats, Razorpay Payment, My Bookings |
 
 > You can also click the **"Demo User"** or **"Demo Admin"** button on the Login page for 1-click access!
 
@@ -223,7 +223,7 @@ Open **[http://localhost:5000](http://localhost:5000)** in your browser!
 - `POST /api/shows` - Schedule new show *(Admin only)*
 
 ### Bookings
-- `POST /api/bookings` - Create booking with backend seat availability validation & mock payment *(Authenticated)*
+- `POST /api/bookings` - Create booking with backend seat availability validation & Razorpay payment *(Authenticated)*
 - `GET /api/bookings/my-bookings` - Get user's ticket booking history *(Authenticated)*
 - `GET /api/bookings/:id` - Get specific booking pass *(Authenticated)*
 - `GET /api/bookings` - View all customer bookings *(Admin only)*
